@@ -1,23 +1,21 @@
 import streamlit as st
 import pandas as pd 
 import altair as alt
-
 st.set_page_config(layout='wide')
-
 st.header('Analisis Iklim Harian Berdasarkan Data BMKG di wilayah Kota Bandung: Studi tentang Temperatur, Kelembapan, dan Curah Hujan')
 st.text('Nanda Ali Putra - Dqlab TETRIS PROGRAM Batch 3 Capstone Project')
 st.write('''Sebagai negara yang berada di iklim tropis, Indonesia hanya memiliki dua musim yaitu musim hujan dan kemarau. 
 Setiap musim memiliki karakteristiknya masing-masing seperti yang telah diketahui masyarakat pada umumnya. 
 Namun, dewasa ini banyak terjadi ketidaksesuaian antara musim yang sedang terjadi dengan semestinya.
 Hal tersebut tentunya membuat masyarakat tidak bisa mengantisipasi apa yang perlu mereka persiapkan untuk dampak yang akan terjadi.
-Oleh sebab itu, mari kita analisis persoalan tersebut berdasarkan salah satu wilayah di Indonesia yaiti wilayah Bandung''')
+Oleh sebab itu, mari kita analisis persoalan tersebut berdasarkan salah satu wilayah di Indonesia yaitu wilayah Bandung''')
 st.text('''ID WMO	    :  96783
 Nama Stasiun	:  Stasiun Geofisika Bandung
 Lintang	    :  -6.88356
 Bujur	    :  107.59733
 Elevasi	    :  791
 ''')
-df = pd.read_excel('C:\\Users\\LENOVO\\Documents\\laporan_harian_iklim.xlsx')
+df = pd.read_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vQEuwdOUTwgsnn1HyLsbVUJalAMr82-nGigVqOMW-SvX84JsXn3-JZAatHUKyllamrBZVzW2_sQcIG7/pub?gid=616061358&single=true&output=csv')
 
 df
 
@@ -39,8 +37,8 @@ chart_1 = alt.Chart(melted_df).mark_line().encode(
 
 st.altair_chart(chart_1, use_container_width=True)
 
-kolom1 = df['t_min']
-kolom2 = df['t_max']
+kolom1 = df['t_min'].astype(float)
+kolom2 = df['t_max'].astype(float)
 
 korelasi = kolom1.corr(kolom2)
 
